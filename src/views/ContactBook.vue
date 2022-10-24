@@ -10,9 +10,7 @@
             </h4>
             <ContactList v-if="filteredContactsCount > 0" :contacts="filteredContacts"
                 v-model:activeIndex="activeIndex" />
-            <p v-else>
-                Không có liên hệ nào.
-            </p>
+            <p v-else>Không có liên hệ nào.</p>
             <div class="mt-3 row justify-content-around align-items-center">
                 <button class="btn btn-sm btn-primary" @click="refreshList()">
                     <i class="fas fa-redo" /> Làm mới
@@ -44,22 +42,21 @@
     </div>
 </template>
 <script>
-import ContactCard from '@/components/ContactCard.vue';
-import InputSearch from '@/components/InputSearch.vue';
-import ContactList from '@/components/ContactList.vue';
-import { contactService } from '@/services/contact.service';
+import ContactCard from "@/components/ContactCard.vue";
+import InputSearch from "@/components/InputSearch.vue";
+import ContactList from "@/components/ContactList.vue";
+import { contactService } from "@/services/contact.service";
 export default {
     components: {
         ContactCard,
         InputSearch,
         ContactList,
     },
-    // The full code will be presented below
     data() {
         return {
             contacts: [],
             activeIndex: -1,
-            searchText: '',
+            searchText: "",
         };
     },
     watch: {
@@ -74,7 +71,7 @@ export default {
         contactsAsStrings() {
             return this.contacts.map((contact) => {
                 const { name, email, address, phone } = contact;
-                return [name, email, address, phone].join('');
+                return [name, email, address, phone].join("");
             });
         },
         // Return contacts filtered by the search box.
@@ -108,7 +105,7 @@ export default {
             this.activeIndex = -1;
         },
         async onDeleteContacts() {
-            if (confirm('Bạn muốn xóa tất cả Liên hệ?')) {
+            if (confirm("Bạn muốn xóa tất cả Liên hệ?")) {
                 try {
                     await contactService.deleteMany();
                     this.refreshList();
@@ -118,7 +115,7 @@ export default {
             }
         },
         goToAddContact() {
-            this.$router.push({ name: 'contact.add' });
+            this.$router.push({ name: "contact.add" });
         },
     },
     mounted() {
@@ -126,6 +123,9 @@ export default {
     },
 };
 </script>
+  
+  };
+  
 <style scoped>
 .page {
     text-align: left;
